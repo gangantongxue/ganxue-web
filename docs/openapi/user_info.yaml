@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: Ganxue Server API
+  description: Ganxue Server API for user information functionality.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/auth
+paths:
+  /user/info:
+    get:
+      summary: 获取用户信息
+      description: 获取当前登录用户的详细信息，包括基本资料和学习统计数据。
+      operationId: getUserInfo
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: 成功获取用户信息
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 获取成功
+                  data:
+                    type: object
+                    properties:
+                      user_info:
+                        type: object
+                        properties:
+                          email:
+                            type: string
+                            example: user@example.com
+                          user_name:
+                            type: string
+                            example: username
+                      study_stats:
+                        type: object
+                        properties:
+                          streak_days:
+                            type: integer
+                            description: 连续学习天数（天）
+                            example: 7
+                          total_days:
+                            type: integer
+                            description: 总学习天数（天）
+                            example: 30
+                          go_last_chapter:
+                            type: string
+                            description: go上一次的章节
+                            example: “golang00”
+                          c_last_chapter:
+                            type: string
+                          cpp_last_chapter:
+                            type: string
+        '401':
+          description: 未授权
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 未授权，请重新登录
+        '500':
+          description: 服务器错误
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 服务器错误
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

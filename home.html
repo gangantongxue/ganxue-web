@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>甘学 - 个人主页</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dialog.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+</head>
+<body>
+    <div class="home-container">
+        <main class="main-content">
+            <header class="header user-header">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">
+                        <img src="assets/images/default_avatar.svg" alt="用户头像" width="40" height="40">
+                    </div>
+                    <div class="user-name" id="userName">加载中...</div>
+                </div>
+                <button class="logout-btn" id="logoutBtn">退出登录</button>
+            </header>
+            
+            <div class="stats-container">
+                <h2 class="stats-title">学习统计</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="streak_days">0</div>
+                        <div class="stat-label">连续学习天数（天）</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="total_days">0</div>
+                        <div class="stat-label">总学习天数（天）</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="golang-btn" id="golangBtn">Golang</button>
+        </main>
+    </div>
+
+    <script type="module" src="assets/js/home.js"></script>
+</body>
+</html>

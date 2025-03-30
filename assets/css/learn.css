@@ -1,0 +1,276 @@
+/* 学习页面特定样式 */
+.learn-container {
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(45deg, #7c9885, #b5d6c3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.learn-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    width: 100%;
+    gap: 40px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.back-home-btn {
+    background: transparent;
+    color: #7c9885;
+    border: 1px solid #7c9885;
+    border-radius: 20px;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.back-home-btn:hover {
+    background: #7c9885;
+    color: white;
+}
+
+.learn-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.content-panel {
+    flex: 1;
+    background-color: white;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.editor-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.editor-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.reset-btn {
+    background: #7c9885;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.output-section {
+    border-top: 1px solid #eee;
+    background-color: #f8f9fa;
+}
+
+.output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.output-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.toggle-output-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+.toggle-output-btn.collapsed .toggle-icon {
+    transform: rotate(-90deg);
+}
+
+.output-container {
+    padding: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+    transition: max-height 0.3s ease-out;
+}
+
+.output-container.collapsed {
+    max-height: 0;
+    padding: 0 15px;
+    overflow: hidden;
+}
+
+.output-content {
+    margin: 0;
+    font-family: monospace;
+    white-space: pre-wrap;
+    color: #333;
+}
+
+.reset-btn:hover {
+    background: #b5d6c3;
+}
+
+.editor-container {
+    flex: 1;
+    overflow: hidden;
+}
+
+/* CodeMirror 自定义样式 */
+.CodeMirror {
+    height: 100% !important;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* 文档内容样式 */
+.doc-content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.doc-content h1,
+.doc-content h2,
+.doc-content h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    color: #2c3e50;
+}
+
+.doc-content h1 {
+    font-size: 2em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.3em;
+}
+
+.doc-content h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.3em;
+}
+
+.doc-content h3 {
+    font-size: 1.25em;
+}
+
+.doc-content p {
+    margin: 1em 0;
+}
+
+.doc-content pre {
+    background-color: #f6f8fa;
+    border-radius: 3px;
+    padding: 16px;
+    overflow: auto;
+    margin: 1em 0;
+}
+
+.doc-content code {
+    font-family: 'Consolas', 'Monaco', monospace;
+    background-color: rgba(27, 31, 35, 0.05);
+    border-radius: 3px;
+    padding: 0.2em 0.4em;
+    font-size: 0.9em;
+}
+
+.doc-content pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 18px;
+    color: #7c9885;
+}
+
+.chapter-navigation {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.nav-btn {
+    background: #7c9885;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav-btn:hover {
+    background: #b5d6c3;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .learn-content {
+        flex-direction: column;
+    }
+    
+    .content-panel,
+    .editor-panel {
+        flex: none;
+        height: 50%;
+    }
+}

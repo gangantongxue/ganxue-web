@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>敢学 - 学习页面</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dialog.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/learn.css">
+    <!-- CodeMirror 核心库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <!-- Go 语言支持 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/go/go.min.js"></script>
+    <!-- 主题 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <!-- Markdown 渲染库 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="learn-container">
+        <header class="learn-header">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">
+                    <img src="assets/images/default_avatar.svg" alt="用户头像" width="40" height="40">
+                </div>
+                <div class="user-name" id="userName">加载中...</div>
+            </div>
+            <div class="header-actions">
+                <button class="back-home-btn" id="backHomeBtn">返回主页</button>
+                <button class="logout-btn" id="logoutBtn">退出登录</button>
+            </div>
+        </header>
+        
+        <main class="learn-content">
+            <div class="content-panel">
+                <div class="doc-content" id="docContent">
+                    <div class="loading">加载中...</div>
+                </div>
+            </div>
+            <div class="editor-panel">
+                <div class="editor-header">
+                    <h3>Go 代码编辑器</h3>
+                    <div class="editor-actions">
+                        <button class="reset-btn" id="resetCodeBtn">恢复初始代码</button>
+                        <button class="reset-btn" id="submitCodeBtn">提交代码</button>
+                    </div>
+                </div>
+                <div class="editor-container" id="codeEditor"></div>
+                <div class="output-section">
+                    <div class="output-header">
+                        <h3>运行输出</h3>
+                        <button class="toggle-output-btn" id="toggleOutputBtn">
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                    </div>
+                    <div class="output-container" id="outputContainer">
+                        <pre class="output-content" id="outputContent"></pre>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="chapter-navigation">
+        <button class="nav-btn" id="prevChapterBtn">上一节</button>
+        <button class="nav-btn" id="nextChapterBtn">下一节</button>
+    </div>
+    <script type="module" src="assets/js/learn.js"></script>
+</body>
+</html>
