@@ -12,6 +12,51 @@ function getUrlParam(name) {
     return urlParams.get(name);
 }
 
+// Go语言关键字列表
+const goKeywords = [
+    'break', 'default', 'func', 'interface', 'select', 'case', 'defer', 'go', 'map', 'struct',
+    'chan', 'else', 'goto', 'package', 'switch', 'const', 'fallthrough', 'if', 'range', 'type',
+    'continue', 'for', 'import', 'return', 'var', 'append', 'bool', 'byte', 'cap', 'close', 'complex',
+    'complex64', 'complex128', 'error', 'float32', 'float64', 'imag', 'int', 'int8', 'int16',
+    'int32', 'int64', 'iota', 'len', 'make', 'new', 'nil', 'panic', 'Print', 'Println', 'real',
+    'recover', 'string', 'uint', 'uint8', 'uint16', 'uint32', 'uint64', 'uintptr', 'true', 'false',
+    'Printf', 'Scan', 'Scanf', 'Scanln'
+];
+
+// 自定义代码提示函数
+function goHint(editor) {
+    const cursor = editor.getCursor();
+    const line = editor.getLine(cursor.line);
+    const start = cursor.ch;
+    const end = cursor.ch;
+    
+    // 获取当前文档中的所有单词作为变量列表
+    const text = editor.getValue();
+    const variableRegex = /\b([a-zA-Z][a-zA-Z0-9_]*)\b/g;
+    const variables = new Set();
+    let match;
+    
+    while ((match = variableRegex.exec(text)) !== null) {
+        variables.add(match[1]);
+    }
+    
+    // 合并关键字和变量
+    const allCompletions = [...goKeywords, ...variables];
+    
+    // 过滤出匹配当前输入的单词
+    const currentWord = line.slice(Math.max(0, start - 30), start).match(/[\w$]+$/)?.[0] || '';
+    const currentWordLower = currentWord.toLowerCase();
+    const filtered = allCompletions.filter(word => 
+        word !== currentWord && word.toLowerCase().startsWith(currentWordLower)
+    );
+    
+    return {
+        list: filtered,
+        from: CodeMirror.Pos(cursor.line, start - currentWord.length),
+        to: CodeMirror.Pos(cursor.line, end)
+    };
+}
+
 // 初始化CodeMirror编辑器
 function initCodeEditor(code) {
     // 保存初始代码用于重置
@@ -30,7 +75,21 @@ function initCodeEditor(code) {
             indentUnit: 4,
             autoCloseBrackets: true,
             matchBrackets: true,
-            lineWrapping: true
+            lineWrapping: true,
+            extraKeys: {"Ctrl-Space": "autocomplete"}, // 添加快捷键触发自动补全
+            hintOptions: {
+                hint: goHint,
+                completeSingle: false, // 当只有一个匹配项时不自动补全
+                alignWithWord: true,   // 提示框与当前单词对齐
+                closeOnUnfocus: true   // 失去焦点时关闭提示框
+            }
+        });
+        
+        // 监听输入事件，实时显示代码提示
+        editor.on("inputRead", function(cm, change) {
+            if (change.origin !== "complete" && /[\w$]/.test(change.text[0])) {
+                cm.showHint();
+            }
         });
         
         // 编辑器自适应大小
@@ -88,7 +147,7 @@ async function getDocContent(group, docId) {
             return null;
         }
         
-        const response = await authRequest(`http://localhost:8080/auth/get-docs?id=${encodeURIComponent(docId)}&group=${encodeURIComponent(group)}`, {
+        const response = await authRequest(`http://115.190.92.245:8080/auth/get-docs?id=${encodeURIComponent(docId)}&group=${encodeURIComponent(group)}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'
@@ -215,7 +274,7 @@ async function nextChapter() {
 // 获取用户信息
 async function getUserInfo() {
     try {
-        const response = await authRequest('http://localhost:8080/auth/user/info', {
+        const response = await authRequest('http://115.190.92.245:8080/auth/user/info', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'
@@ -253,7 +312,7 @@ async function submitCode() {
         // 获取编辑器代码
         const code = editor.getValue();
 
-        const response = await authRequest('http://localhost:8080/auth/run-code', {
+        const response = await authRequest('http://115.190.92.245:8080/auth/run-code', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

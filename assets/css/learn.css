@@ -262,6 +262,38 @@
     background: #b5d6c3;
 }
 
+/* 代码自动补全样式 */
+.CodeMirror-hints {
+    position: absolute;
+    z-index: 10;
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 2px;
+    border-radius: 4px;
+    border: 1px solid #b5d6c3;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    max-height: 20em;
+    overflow-y: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+}
+
+.CodeMirror-hint {
+    margin: 0;
+    padding: 4px 8px;
+    border-radius: 2px;
+    white-space: pre;
+    color: #333;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+li.CodeMirror-hint-active {
+    background-color: #7c9885;
+    color: white;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .learn-content {

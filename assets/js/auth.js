@@ -22,7 +22,7 @@ export function getCookie(name) {
 // 刷新短token
 async function refreshToken() {
     try {
-        const response = await fetch('http://localhost:8080/open/refresh', {
+        const response = await fetch('http://115.190.92.245:8080/open/refresh', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'
@@ -111,7 +111,7 @@ export async function authRequest(url, options = {}) {
 // 获取验证码
 export async function getCaptcha(email) {
     try {
-        const response = await authRequest(`http://localhost:8080/open/ver-code?email=${encodeURIComponent(email)}`, {
+        const response = await authRequest(`http://115.190.92.245:8080/open/ver-code?email=${encodeURIComponent(email)}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'
@@ -141,7 +141,7 @@ export async function getCaptcha(email) {
 // 用户注册
 export async function registerUser(userData) {
     try {
-        const response = await authRequest('http://localhost:8080/open/sign-up', {
+        const response = await authRequest('http://115.190.92.245:8080/open/sign-up', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -172,7 +172,7 @@ export async function registerUser(userData) {
 // 用户登录
 export async function loginUser(credentials) {
     try {
-        const response = await authRequest('http://localhost:8080/open/sign-in', {
+        const response = await authRequest('http://115.190.92.245:8080/open/sign-in', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -207,7 +207,7 @@ export async function loginUser(credentials) {
 // 删除用户
 export async function deleteUser(email) {
     try {
-        const response = await authRequest(`http://localhost:8080/open/delete-user?email=${encodeURIComponent(email)}`, {
+        const response = await authRequest(`http://115.190.92.245:8080/open/delete-user?email=${encodeURIComponent(email)}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'
@@ -229,7 +229,7 @@ export async function deleteUser(email) {
 // 忘记密码/重置密码
 export async function resetPassword(resetData) {
     try {
-        const response = await authRequest('http://localhost:8080/open/forget-password', {
+        const response = await authRequest('http://115.190.92.245:8080/open/forget-password', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

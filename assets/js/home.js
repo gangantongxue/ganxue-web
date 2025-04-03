@@ -24,7 +24,7 @@ function checkLogin() {
 // 获取用户信息
 async function getUserInfo() {
     try {
-        const response = await authRequest('http://localhost:8080/auth/user/info', {
+        const response = await authRequest('http://115.190.92.245:8080/auth/user/info', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'
