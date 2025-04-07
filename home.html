@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>甘学 - 个人主页</title>
+    <title>敢学 - 个人主页</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dialog.css">
     <link rel="stylesheet" href="assets/css/home.css">
@@ -35,7 +35,27 @@
                 </div>
             </div>
 
-            <button class="golang-btn" id="golangBtn">Golang</button>
+            <div class="subjects-container">
+                <div class="subject-item">
+                    <button class="subject-btn golang-btn" id="golangBtn">Golang</button>
+                </div>
+                
+                <div class="subject-item">
+                    <button class="subject-btn c-btn" id="cBtn">C语言</button>
+                </div>
+                
+                <div class="subject-item">
+                    <button class="subject-btn cpp-btn" id="cppBtn">C++</button>
+                </div>
+            </div>
+            
+            <!-- 固定的目录区域 -->
+            <div class="fixed-catalogue" id="fixedCatalogue">
+                <div class="catalogue-content">
+                    <h3 id="catalogueTitle">目录</h3>
+                    <ul class="catalogue-list" id="catalogueList"></ul>
+                </div>
+            </div>
         </main>
     </div>
 

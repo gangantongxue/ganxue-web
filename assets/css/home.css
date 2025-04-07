@@ -77,7 +77,9 @@
 }
 
 .stats-container {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -118,7 +120,21 @@
     color: #666;
 }
 
-.golang-btn {
+.subjects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.subject-item {
+    position: relative;
+    display: inline-block;
+}
+
+.subject-btn {
     background: linear-gradient(45deg, #7c9885, #b5d6c3);
     color: white;
     border: none;
@@ -130,9 +146,179 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.golang-btn:hover {
+.subject-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.golang-btn {
+    background: linear-gradient(45deg, #7c9885, #b5d6c3);
+}
+
+.c-btn {
+    background: linear-gradient(45deg, #5a7d9a, #90b8d4);
+}
+
+.cpp-btn {
+    background: linear-gradient(45deg, #9a5a7d, #d490b8);
+}
+
+/* 固定目录区域样式 */
+.fixed-catalogue {
+    width: 100%;
+    max-width: 600px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(124, 152, 133, 0.15);
+    margin-top: 30px;
+    height: 300px; /* 设置固定高度 */
+    overflow-y: hidden; /* 移除垂直滚动条，只保留内部列表的滚动条 */
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* 在iOS上提供平滑滚动 */
+    position: relative; /* 确保定位正确 */
+    transition: all 0.3s ease;
+    border: 1px solid rgba(181, 214, 195, 0.3);
+}
+
+.catalogue-content {
+    padding: 20px;
+}
+
+.catalogue-content h3 {
+    margin: 0 0 15px 0;
+    color: #3a5a45;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.catalogue-content h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(45deg, #7c9885, #b5d6c3);
+    border-radius: 3px;
+}
+
+.catalogue-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 220px; /* 固定高度，留出标题空间 */
+    overflow-y: auto; /* 自动显示垂直滚动条 */
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* 在iOS上提供平滑滚动 */
+    padding: 5px;
+}
+
+.catalogue-list li {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(181, 214, 195, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    position: relative;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+
+.catalogue-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.catalogue-list li:hover {
+    background-color: rgba(181, 214, 195, 0.1);
+    transform: translateX(5px);
+    color: #7c9885;
+    box-shadow: 0 2px 8px rgba(124, 152, 133, 0.1);
+}
+
+/* 目录项悬停效果 */
+.catalogue-list li:hover::before {
+    transform: scale(1.1);
+    box-shadow: 0 2px 5px rgba(124, 152, 133, 0.3);
+}
+
+/* 美化滚动条样式 */
+.catalogue-popup::-webkit-scrollbar,
+.catalogue-list::-webkit-scrollbar {
+    width: 5px;
+    display: block;
+    height: auto;
+}
+
+.catalogue-popup::-webkit-scrollbar-thumb,
+.catalogue-list::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #7c9885, #b5d6c3);
+    border-radius: 10px;
+}
+
+.catalogue-popup::-webkit-scrollbar-track,
+.catalogue-list::-webkit-scrollbar-track {
+    background-color: rgba(241, 241, 241, 0.5);
+    border-radius: 10px;
+}
+
+/* 标准滚动条样式（适用于Firefox等非WebKit浏览器） */
+.catalogue-popup,
+.catalogue-list {
+    scrollbar-width: thin;
+    scrollbar-color: #b5d6c3 rgba(241, 241, 241, 0.5);
+}
+
+/* 添加目录项动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.catalogue-list li {
+    animation: fadeIn 0.3s ease-out forwards;
+    animation-delay: calc(0.05s * var(--item-index, 0));
+    opacity: 0;
+}
+
+/* 添加目录容器的悬停效果 */
+.fixed-catalogue:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(124, 152, 133, 0.2);
+}
+
+/* 添加目录项的计数样式 */
+.catalogue-list {
+    counter-reset: item-counter;
+}
+
+.catalogue-list li::before {
+    content: counter(item-counter);
+    counter-increment: item-counter;
+    color: white;
+    background: linear-gradient(45deg, #7c9885, #b5d6c3);
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.catalogue-list li:hover::before {
+    transform: scale(1.1);
+    box-shadow: 0 2px 5px rgba(124, 152, 133, 0.3);
 }
 
 /* 响应式设计 */
@@ -144,5 +330,12 @@
     .header {
         flex-direction: column;
         gap: 10px;
+    }
+    
+    /* 小屏幕上调整目录弹出框 */
+    .catalogue-popup {
+        width: 80vw;
+        left: 10vw;
+        transform: none;
     }
 }

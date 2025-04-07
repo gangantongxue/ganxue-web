@@ -147,7 +147,7 @@ async function getDocContent(group, docId) {
             return null;
         }
         
-        const response = await authRequest(`http://115.190.92.245:8080/auth/get-docs?id=${encodeURIComponent(docId)}&group=${encodeURIComponent(group)}`, {
+        const response = await authRequest(`api/auth/get-docs?id=${encodeURIComponent(docId)}&group=${encodeURIComponent(group)}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'
@@ -274,7 +274,7 @@ async function nextChapter() {
 // 获取用户信息
 async function getUserInfo() {
     try {
-        const response = await authRequest('http://115.190.92.245:8080/auth/user/info', {
+        const response = await authRequest('api/auth/user/info', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'
@@ -312,7 +312,7 @@ async function submitCode() {
         // 获取编辑器代码
         const code = editor.getValue();
 
-        const response = await authRequest('http://115.190.92.245:8080/auth/run-code', {
+        const response = await authRequest('api/auth/run-code', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
