@@ -1,37 +1,66 @@
-ganxue.top, 115.190.92.245 {
+ganxue.top {
     root * /home/ganxue-web
-    file_server
-    try_files {path} {path}/ /index.html
 
-    @options {
-        method OPTIONS
+    # 禁止访问隐藏文件
+    @hidden {
+        file is_hidden
+    }
+    handle @hidden {
+        respond "Forbidden" 403
     }
 
-    header @options {
-        Access-Control-Allow-Origin {http.request.header.Origin}
-        Access-Control-Allow-Methods GET, POST, OPTIONS
-        Access-Control-Allow-Headers DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
-        Access-Control-Allow-Credentials true
+    # 处理 /api/open 请求
+    handle /api/open/* {
+        # 精确路径重写：去除 /api/open 前缀
+        #rewrite * /open/{path}
+
+        # CORS 配置
+        @options method OPTIONS
+        handle @options {
+            respond 204
+        }
+        header {
+            Access-Control-Allow-Origin "{http.request.origin}"
+            Access-Control-Allow-Methods "GET, POST, OPTIONS"
+            Access-Control-Allow-Headers "DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization"
+            Access-Control-Allow-Credentials "true"
+        }
+
+        reverse_proxy http://127.0.0.1:8080 {
+            header_up Host {host}
+            header_up X-Real-IP {http.request.remote}
+            header_up X-Forwarded-For {http.request.remote}
+        }
     }
 
-    respond @options 204
+    # 处理 /api/auth 请求
+    handle /api/auth/* {
+        # 精确路径重写：去除 /api/auth 前缀
+        #rewrite * /auth/{path}
 
-    reverse_proxy /api/open/* http://115.190.92.245:8080/open/ {
-        header_up Host {host}
-        header_up X-Real-IP {remote}
-        header_up X-Forwarded-For {header.X-Forwarded-For}
+        # CORS 配置
+        @options method OPTIONS
+        handle @options {
+            respond 204
+        }
+        header {
+            Access-Control-Allow-Origin "{http.request.origin}"
+            Access-Control-Allow-Methods "GET, POST, OPTIONS"
+            Access-Control-Allow-Headers "DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization"
+            Access-Control-Allow-Credentials "true"
+        }
+
+        reverse_proxy http://127.0.0.1:8080 {
+            header_up Host {host}
+            header_up X-Real-IP {http.request.remote}
+            header_up X-Forwarded-For {http.request.remote}
+        }
     }
 
-    reverse_proxy /api/auth/* http://115.190.92.245:8080/auth/ {
-        header_up Host {host}
-        header_up X-Real-IP {remote}
-        header_up X-Forwarded-For {header.X-Forwarded-For}
+    # 处理前端路由和静态文件
+    handle {
+        try_files {path} {path}/ /index.html
+        file_server
+        header Cache-Control "no-cache"
     }
-
-    header Cache-Control no-cache
-
-    @hidden_files {
-        path_regexp hidden ^/\.
-    }
-    respond @hidden_files 403
-}  
+}
