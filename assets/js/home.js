@@ -112,7 +112,7 @@ function renderCatalogue(catalogueData) {
     
     // 初始化目录区域
     const catalogueList = document.getElementById('catalogueList');
-    catalogueList.innerHTML = '<li>请将鼠标移到科目按钮上查看目录</li>';
+    catalogueList.innerHTML = '<li>欢迎使用敢学<br>让我们开启编程学习之旅吧</li>';
     
     // 为科目按钮添加鼠标悬停事件
     setupSubjectHoverEvents();
