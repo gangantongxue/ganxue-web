@@ -1,7 +1,7 @@
 # GanXue-Web - Golang交互式学习平台
 
 ## 网页地址
-[敢学](https://ganxue.com)
+[敢学](https://ganxue.top)
 
 ## 项目简介
 
